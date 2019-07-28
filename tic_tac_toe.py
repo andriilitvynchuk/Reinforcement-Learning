@@ -93,10 +93,10 @@ class Environment:
 
 
     def reward(self, sym):
-        if not self.game_over():
+        if not self.game_over() or (self.game_over and self.winner == None):
             return 0
 
-        return 1 if self.winner == sym else 0
+        return 1 if self.winner == sym else -1
 
 
     def get_state(self):
@@ -273,7 +273,7 @@ if __name__ == '__main__':
     p1.set_symbol(env.x)
     p2.set_symbol(env.o)
 
-    T = 10000
+    T = 20000
     for i in tqdm(range(T)):
         play_game(p1, p2, Environment())
 
